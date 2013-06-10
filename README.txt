@@ -12,7 +12,7 @@ To Build and Optimized Project
 The optimzer for Require - r.js - requires Node.js or Rhino. To build
 with Node, use the following command from the project root directory
 
- > node rq/node_modules/requirejs/bin/r.js -o build.js name=rq/almond
+ > node rq/node_modules/requirejs/bin/r.js -o build.minicart.js name=rq/almond
 
 By default this will put the optimized file mini-cart.min.js in the output directory.
 The build options can be changed by editing the build.minicart.js file 
