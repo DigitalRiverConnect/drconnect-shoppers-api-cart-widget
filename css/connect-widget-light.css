@@ -53,7 +53,7 @@ span.connect-lineitem-saleprice {
 .connect-widget-button > a:not(.btn) {
     display: inline-block;
     *display: inline;
-    padding: 4px 12px;
+    padding: 4px 6px;
     margin-bottom: 0;
     *margin-left: .3em;
     font-size: 14px;

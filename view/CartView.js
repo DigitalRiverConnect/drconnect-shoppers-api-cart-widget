@@ -44,7 +44,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         couponTemplate :
         '<div class="connect-cart-couponwrapper connect-widget-button">' +
         '    <input id="couponCode" class="connect-widget-couponcode" type="text" value="" placeholder="Enter Coupon Code"/>' +
-        '    <a class="connect-cart-applycoupon btn" disabled="disabled">' +
+        '    <a class="connect-cart-applycoupon" disabled="disabled">' +
         '        <i class="icon-ok-sign"></i> Apply Code' +
         '    </a>' +
         '</div>',
@@ -55,7 +55,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '        <a href="#" class="connect-cart-showcode">Have a Promo Code?</a>' +
         '    </div>' +
         '    <div class="connect-widget-button right">' +
-        '        <a href="#" class="connect-cart-checkout dr_button"><i class="icon-shopping-cart icon-white"></i> Checkout</a>' +
+        '        <a href="#" class="connect-cart-checkout"><i class="icon-shopping-cart icon-white"></i> Checkout</a>' +
         '    </div>' +
         '    <div class="connect-widget-clearfix"></div>' +
         '</div>',
@@ -92,7 +92,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             ' data-maxorderquantity=<%=product.inventoryStatus.maxOrderQuantity%>' +
             '<%} %>' +
             '/>' +
-            '   <a class="connect-cart-updatebtn btn" href="#"><i class="icon-refresh"></i></a>' +
+            '   <span class="connect-widget-button"><a class="connect-cart-updatebtn" href="#"><i class="icon-refresh"></i></a></span>' +
             '</div>' +
             '<ul>' +
                 '<li class="connect-cart-remove"><span><a href="#" data-lineitem-id="<%= id %>"><i class="icon-remove"></i> Remove</a></span></li>' +
