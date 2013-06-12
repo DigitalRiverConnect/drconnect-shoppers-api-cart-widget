@@ -198,8 +198,17 @@ define([
             var self = this;
             self.options = $.extend({}, o);
             // write back several constructor args to the cofig object
+
             if (self.options.emptyOfferId) {
                 config.setEmptyOfferId(self.options.emptyOfferId);
+            }
+
+            if (self.options.emptyOfferPop) {
+                config.setEmptyOfferPop(self.options.emptyOfferPop);
+            }
+
+            if (self.options.siteId) {
+                config.setSiteId(self.options.siteId);
             }
         },
 

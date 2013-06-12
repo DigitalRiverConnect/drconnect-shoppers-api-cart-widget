@@ -1,6 +1,5 @@
 /*jslint eqeq: true, nomen: true */
 define(['config', 'connection/Connection', 'lib/q'], function(config, Connection, Q) {
-    "use strict";
     /**
      * This object is for getting a Session for connecting
      * @returns {Session}
@@ -59,7 +58,11 @@ define(['config', 'connection/Connection', 'lib/q'], function(config, Connection
         anonymousLogin: function(promise) {
             var self = this,
                 d = new Date(),
-                uri = config.getTokenServiceUri();
+                locale = self.getLocale(),
+                siteId = config.getSiteId(),
+                uri;
+
+            uri = config.getTokenServiceUri(locale, siteId);
 
             if (self.pendingRequest == null) {
                 self.pendingRequest = self._connection.request(uri, 'GET').then(function(sessionData) {
@@ -71,6 +74,7 @@ define(['config', 'connection/Connection', 'lib/q'], function(config, Connection
                     if (sessionData.stickyParameters === null || sessionData.stickyParameters === "") {
                         tokenOptions.domain = sessionData.shopDomain;
                     } else {
+                        tokenOptions.domain = sessionData.shopDomain;
                         tokenOptions.cookie = sessionData.stickyParameters;
                     }
                     return self.getAnnonymousAccessToken(tokenOptions);
@@ -105,6 +109,12 @@ define(['config', 'connection/Connection', 'lib/q'], function(config, Connection
                     self.pendingRequest = null;
                 });
         },
+        updateShopperSession : function(shopper) {
+            var self = this;
+            if (shopper) {
+                self._locale = shopper.Locale || config.getDefaultLocale();
+            }
+        },
 
         reset : function() {
             var self = this;
@@ -129,6 +139,14 @@ define(['config', 'connection/Connection', 'lib/q'], function(config, Connection
 
         setRefreshToken: function(rt) {
             this._refreshToken = rt;
+        },
+
+        getClient : function() {
+            return this._client;
+        }, 
+
+        getLocale : function () {
+            return this._locale || config.getDefaultLocale();
         }
     };
 

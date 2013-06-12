@@ -24,7 +24,9 @@ define(['util/Class', 'connection/Session', 'service/Shopper'], function(Class, 
         },
         // convenience method; passes through to the shopper service
         updateShopper : function(options) {
+            var self = this;
             return this.shopperService.updateShopper(options).then(function(shopper) {
+                self._session.updateShopperSession(shopper);
                 return shopper;
             }, function() {
                 // handle errors 

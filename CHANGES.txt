@@ -1,0 +1,6 @@
+Version 1.2b
+    * Fixed a bug to remove a hard-coded URL
+    * Updated the constructor to require site id
+    * Updated the constructor to add an optional Vanity Domanin parameter
+      (defaults to store.digitalriver.com)
+

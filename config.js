@@ -5,7 +5,8 @@ define([], function() {
         connection : {},
         emptyOfferPop: 'SiteMerchandising_EmptyCart',
         defaultCurrency: 'USD',
-        defaultLocale: 'en_US'
+        defaultLocale: 'en_US',
+        vanityDomain: 'store.digitalriver.com'
     };
 
     // store connection information for various environments
@@ -72,8 +73,14 @@ define([], function() {
             return [self.getBaseUrl(), c.VERSION, c.ANONYMOUS_LOGIN].join("/");
         },
 
-        getTokenServiceUri : function() {
-            return "https://store.digitalriver.com/store?Action=ShopDomain&Locale=en_US&SiteId=cpryce&Env=DESIGN";
+        getTokenServiceUri : function(locale, siteId) {
+            var self = this,
+                currentLocale = locale || self.getDefaultLocale(),
+                qstr = ["Action=ShopDomain",
+                        "Locale=" + currentLocale,
+                        "SiteId=" + siteId].join('&');
+
+            return "https://" + self.getVanityDomain() + "/store?" + qstr;
         },
 
         getCategoryResourceUrl : function() {
@@ -166,6 +173,22 @@ define([], function() {
 
         setEmptyOfferPop : function(popName) {
             config.emptyOfferPop = popName;
+        },
+
+        getSiteId: function() {
+            return config.siteId;
+        },
+
+        setSiteId: function(siteid) {
+            config.siteId = siteid;
+        },
+
+        getVanityDomain : function() {
+            return config.vanityDomain;
+        },
+
+        setVanityDomain : function(d) {
+            config.vanityDomain = d;
         }
     };
 });
