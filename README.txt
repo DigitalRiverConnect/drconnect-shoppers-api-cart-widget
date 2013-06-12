@@ -54,7 +54,7 @@ Example HTML File
         // the mini-cart constructor
         requirejs(["minicart"], function(MiniCart) {
             var cart = new MiniCart({
-                apiKey: '3e592bdeda12bd5bb18e4787e62cd138'
+                apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca'
             });
         });
     </script>
@@ -72,7 +72,8 @@ Example Constructor
 <script>
     requirejs(["minicart"], function(MiniCart) {
         var cart = new MiniCart({
-            apiKey: '3e592bdeda12bd5bb18e4787e62cd138'
+            apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca',
+            siteId: 'shopme'
         });
     });
 </script>
@@ -80,6 +81,8 @@ Example Constructor
 Arguments to the Constructor
 Name                Type                Required
 apiKey              String              yes
+siteId              String              yes
+vanityDomain        String              No (default 'store.digitalriver.com')
 cartElement         String              No (default 'drMiniCart')
 summaryElement      String              No (default 'drMiniCartSummary')
 currency            Array of strings    No (default [‘USD’] )
