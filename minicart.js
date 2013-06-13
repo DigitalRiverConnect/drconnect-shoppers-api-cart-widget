@@ -60,7 +60,7 @@ define([
         },
 
         init: function(options) {
-            var self = this, cartService, cartView, o;
+            var self = this, cartService, cartView, o, $el;
             // set the options and then get them right away. Defaults will be set.
             self.setOptions(options);
             o = self.getOptions();
@@ -83,6 +83,7 @@ define([
                 cartView.unblockCartUI();
             });
 
+            $el = cartView.getCartElement();
             // listeners for cart events.
             $(cartView).on('drconnect-addtocart', function(evt, btn) {
                 // if the item cannot be added to the cart, follow the link
@@ -90,9 +91,12 @@ define([
                     cartView.showFeedback("Item added to cart.");
                     cartView.setCartQuantity(cartData.totalItemsInCart);
                     cartView.updateCart(cartData, cartService.getEmptyCartOffer());
+                    // TODO this should include a reference to the line item updated.
+                    $el.trigger('drconnect-addtocart', [cartData]);
                 }, function(err) {
                     cartView.showFeedback(err.message, true);
                 });
+
             }).on('drconnect-updatequantity', function(evt, qty, field) {
                 var lineItemId = $(field).attr('data-lineitem-id');
                 // check that the qty != field.defaultValue
@@ -102,6 +106,7 @@ define([
                     // make sure that the qty can be parsed as a number
                     if (!isNaN(qty - 0) && (qty -0) > 0){
                         if (lineItemId) {
+                            $el.trigger('drconnect-updatequantity', [lineItemId, qty, field]);
                             cartService.updateQuantity(lineItemId, qty).then(function(cartData) {
                                 cartView.showFeedback("Quantity Updated");
                                 cartView.setCartQuantity(cartData.totalItemsInCart);
@@ -120,22 +125,26 @@ define([
                 var lineItemId = $(icon).attr('data-lineitem-id');
                 if (lineItemId) {
                     cartService.removeLineItem(lineItemId).then(function(cartData) {
+                        $el.trigger('drconnect-remove', [lineItemId]);
                         cartView.showFeedback("Item removed");
                         cartView.setCartQuantity(cartData.totalItemsInCart);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                     });
                 }
             }).on('drconnect-updatecart', function(evt, cartData) {
-                this.unblockCartUI();
+                cartView.unblockCartUI();
+                $el.trigger('drconnect-updatecart', [cartData]);
             }).on('drconnect-changecurrency', function(evt, c) {
-                this.blockCartUI();
+                cartView.blockCartUI();
                 self.client.updateShopper({currency: c}).then(function() {
+                    $el.trigger('drconnect-changecurrency', [c]);
+
                     // this returns 201 with no content
                     cartView.showFeedback("Currency Settings Updated");
-                    return; // TODO maybe message shopper or log 
+                    return;
                 }, function() {
                     cartView.showFeedback("Unable to update Currenct Settings", true);
-                    return; // TODO maybe message shopper or log error
+                    return;
                 }).done(function() {
                     cartService.clearCache();
                     cartService.getActiveCart().then(function(cartData) {
@@ -147,6 +156,7 @@ define([
                 var v = $(field).val();
                 if (v != null) {
                     cartService.applyCouponCode(v).then(function(cartData) {
+                        // $el.trigger('drconnect-applycoupon', [v, field, cartData]);
                         cartView.showFeedback("Coupon code applied. Final price will be determined at checkout.");
                         $(field).val("");
                         cartView.setCartQuantity(cartData.totalItemsInCart);
@@ -154,6 +164,8 @@ define([
                         cartView.hideCouponEntry();
                     });
                 }
+            }).on('drconnect-cartrender', function(evt) {
+                $el.trigger('drconnect-cartrender');
             });
 
             $('.connect-cart-checkout').on('click', function() {
@@ -209,6 +221,10 @@ define([
 
             if (self.options.siteId) {
                 config.setSiteId(self.options.siteId);
+            }
+
+            if (self.options.vanityDomain) {
+                config.setVanityDomain(self.options.vanityDomain);
             }
         },
 

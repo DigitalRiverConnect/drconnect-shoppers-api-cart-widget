@@ -44,7 +44,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         couponTemplate :
         '<div class="connect-cart-couponwrapper connect-widget-button">' +
         '    <input id="couponCode" class="connect-widget-couponcode" type="text" value="" placeholder="Enter Coupon Code"/>' +
-        '    <a class="connect-cart-applycoupon" disabled="disabled">' +
+        '    <a class="connect-cart-applycoupon" disabled="disabled" href="#">' +
         '        <i class="icon-ok-sign"></i> Apply Code' +
         '    </a>' +
         '</div>',
@@ -79,11 +79,11 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             '<% } %>' +
             '<div class="connect-widget-button"><a class="connect-cart-buy" data-value="<%= addProductToCart.uri %>" href="<%= addProductToCart.uri %>">' +
             '<i class="icon-plus-sign"></i> Add</a></div>' +
-            '</p><div style="line-height: 1; clear: both;"></div>' + 
+            '</p><div style="line-height: 1; clear: both;"></div>' +
         '</div>',
 
         productTemplate :
-        '<div class="connect-cart-lineitem">' + 
+        '<div class="connect-cart-lineitem">' +
             '<p class="connect-cart-title" title="<%= product.shortDescription %>"><%= product.displayName %></p>' +
             '<img src="<%= product.thumbnailImage %>"/>' + 
             '<div><span>Quantity: </span>' +
@@ -97,7 +97,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             '<ul>' +
                 '<li class="connect-cart-remove"><span><a href="#" data-lineitem-id="<%= id %>"><i class="icon-remove"></i> Remove</a></span></li>' +
                 '<li class="connect-cart-sku"><span class="connect-cart-label">SKU: <%= product.sku %></span></li>' +
-                '<li class="connect-cart-producttype">Product Type: <span><%= product.productType %></span></li>' +
+                //'<li class="connect-cart-producttype">Product Type: <span><%= product.productType %></span></li>' +
                 '<li class="connect-lineitem-pricing">' +
                     '<span class="connect-cart-label">Price: </span>' +
                     '<% if (pricing.listPriceWithQuantity.value > pricing.salePriceWithQuantity.value) { %> ' + 
@@ -106,7 +106,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                     '<span class="connect-lineitem-saleprice"><%= pricing.formattedSalePriceWithQuantity %></span>' +
                 '</li>' +
             '</ul>' +
-            '<div style="line-height: 1; clear: both;">&nbsp;</div>' + 
+            '<div style="line-height: 1; clear: both;">&nbsp;</div>' +
         '</div>',
 
         subtotalTemplate :
@@ -148,7 +148,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         // TODO if an summaryAnchorSelector is not provide, insert an element in the DOM
         $(o.summaryElementSelector).append(self.summaryTemplate());
     }
- 
+
     // these templates are only used once so they are not compiled.
     function createCart() {
         var self = this,
@@ -163,7 +163,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         }
         $cart.prepend(headerTemplateHtml);
 
-        // add the currencies ... 
+        // add the currencies ...
         _.each(o.currency, function(cv) {
             $option = $('<option value="' + cv + '">' + cv +'</option>');
             if (cv === o.defaultCurrency) {
@@ -290,6 +290,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                     self.showEmptyCartOffers($cart, offer);
                 });
             }
+            $(self).trigger('drconnect-cartrender');
         },
 
         showLineItems : function($cart, cartData) {
@@ -395,7 +396,9 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         },
 
         updateCartSubtotal : function(cartData) {
-            var self = this, pricing = cartData.pricing;
+            var self = this,
+                pricing = cartData.pricing,
+                $cart = $(self.getOption('cartElementSelector'));
 
             if (pricing && pricing.formattedOrderTotal != null) { // != null for null or undefined
                 // fix an error in the data type
@@ -410,10 +413,10 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                         pricing.shippingAndHandling.value = parseInt(pricing.shippingAndHandling.value, 10);
                     }
                 }
-                $('#drMiniCart').find('.connect-cart-totals').empty().html(self.subtotalTemplate(pricing));
+                $cart.find('.connect-cart-totals').empty().html(self.subtotalTemplate(pricing));
             } else {
                 pricing = {formattedOrderTotal: "0.00", discount: {"value": 0}, shippingAndHandling: {"value": 0}};
-                $('#drMiniCart').find('.connect-cart-totals').empty().html(self.subtotalTemplate(pricing));
+                $cart.find('.connect-cart-totals').empty().html(self.subtotalTemplate(pricing));
             }
         },
 
@@ -422,7 +425,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
             self.renderEmptyOffers($cart, offer);
 
-            $('#drMiniCart').find('.connect-cart-totals').hide().end()
+            $cart.find('.connect-cart-totals').hide().end()
                 .find('.connect-cart-couponwrapper').hide().end()
                 .find('.connect-cart-footer').hide();
 
@@ -441,7 +444,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
             if (offers.length) {
                 if (offer.salesPitch[0]) {
-                    $('#drMiniCart').find('.connect-cart-offerheader').show()
+                    $cart.find('.connect-cart-offerheader').show()
                     .html(self.offerHeaderTemplate({offerHeader : offer.salesPitch[0]}));
                 }
 
@@ -468,24 +471,41 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         },
 
         setCurrency : function(v) {
-            var currencySelector = $('#drMiniCart').find('.connect-cart-currencyselector');
+            var self = this,
+                $cart = $(self.getOption('cartElementSelector')),
+                currencySelector;
+
+            currencySelector = $cart.find('.connect-cart-currencyselector');
             currencySelector.val(v);
         },
 
         blockCartUI: function() {
+            var self = this,
+                $cart = $(self.getOption('cartElementSelector'));
+
             // disable all of the buttons in the mini-cart div.
             // disable the currency selector.
             // mask the cart by adding a class name
-            $('#drMiniCart').find('.connect-cart-body').addClass('connect-loading').find('.connect-content').scrollTop(0);
+            $cart.find('.connect-cart-body').addClass('connect-loading')
+                .find('.connect-content').scrollTop(0).end()
+                .find('.connect-cart-currencyselector').attr('disabled','disabled');
         },
 
         unblockCartUI: function () {
-            $('#drMiniCart').find('.connect-cart-body').removeClass('connect-loading').find('.connect-content').scrollTop(0);
+            var self = this, 
+                o = self.getOptions(),
+                $cart;
+
+            $cart = $(self.getOption('cartElementSelector'))
+                .find('.connect-cart-body').removeClass('connect-loading')
+                .find('.connect-content').scrollTop(0).end()
+                .find('.connect-cart-currencyselector').removeAttr('disabled');
         },
 
         showFeedback : function(msg, isError) {
             var self = this, html,
-                $feedbackContainer = $('#drMiniCart').find('.connect-cart-feedback');
+                $cart = $(self.getOption('cartElementSelector')),
+                $feedbackContainer = $cart.find('.connect-cart-feedback');
 
             // make sure that isError is set. 
             isError = !! isError;
@@ -509,11 +529,18 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         },
 
         hideFeedback : function(callback) {
-            $('#drMiniCart').find('.connect-cart-feedback').fadeOut(function() {
+            var self = this,
+                $cart = $(self.getOption('cartElementSelector'));
+
+            $cart.find('.connect-cart-feedback').fadeOut(function() {
                 if (typeof callback === "function") {
                     callback.call(this);
                 }
             });
+        },
+
+        getCartElement : function() {
+            return $(this.getOption('cartElementSelector'));
         }
     });
 });

@@ -74,7 +74,6 @@ define(['config', 'connection/Connection', 'lib/q'], function(config, Connection
                     if (sessionData.stickyParameters === null || sessionData.stickyParameters === "") {
                         tokenOptions.domain = sessionData.shopDomain;
                     } else {
-                        tokenOptions.domain = sessionData.shopDomain;
                         tokenOptions.cookie = sessionData.stickyParameters;
                     }
                     return self.getAnnonymousAccessToken(tokenOptions);
