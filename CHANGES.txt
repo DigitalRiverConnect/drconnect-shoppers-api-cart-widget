@@ -1,3 +1,7 @@
+Version 1.3b
+    * Removed hard-coded references to cart element
+    * Added cart events
+
 Version 1.2b
     * Fixed a bug to remove a hard-coded URL
     * Updated the constructor to require site id
