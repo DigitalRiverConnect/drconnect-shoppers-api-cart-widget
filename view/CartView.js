@@ -55,7 +55,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '        <a href="#" class="connect-cart-showcode">Have a Promo Code?</a>' +
         '    </div>' +
         '    <div class="connect-widget-button right">' +
-        '        <a href="#" class="connect-cart-checkout"><i class="icon-shopping-cart icon-white"></i> Checkout</a>' +
+        '        <a href="#" class="connect-cart-checkout"><i class="icon-shopping-cart icon"></i> Checkout</a>' +
         '    </div>' +
         '    <div class="connect-widget-clearfix"></div>' +
         '</div>',
@@ -143,10 +143,17 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
     // Utility Functions
     function createCartSummary() {
         var self = this,
-            o = self.getOptions();
+            o = self.getOptions(),
+            summaryTemplateHTML;
 
-        // TODO if an summaryAnchorSelector is not provide, insert an element in the DOM
-        $(o.summaryElementSelector).append(self.summaryTemplate());
+        // TODO if an summaryAnchorSelector is not provided, insert an element in the DOM
+        summaryTemplateHTML = $('#drMiniCartSummaryTemplate');
+        if (summaryTemplateHTML.length) {
+            summaryTemplateHTML = summaryTemplateHTML.html();
+        } else {
+            summaryTemplateHTML = self.summaryTemplate();
+        }
+        $(o.summaryElementSelector).append(_.template(summaryTemplateHTML));
     }
 
     // these templates are only used once so they are not compiled.
@@ -158,7 +165,9 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
         // insert the header
         headerTemplateHtml = $('#drMiniCartHeaderTemplate');
-        if (!headerTemplateHtml.length) {
+        if (headerTemplateHtml.length) {
+            headerTemplateHtml = headerTemplateHtml.get(0).html();
+        } else {
             headerTemplateHtml = _.template(o.cartHeaderTemplate);
         }
         $cart.prepend(headerTemplateHtml);
@@ -174,7 +183,10 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
         // insert the body
         bodyTemplateHtml = $('#drMiniCartBodyTemplate');
-        if (!bodyTemplateHtml.length) {
+        if (bodyTemplateHtml.length) {
+            emptyCartHtml = o.emptyCartTemplate;
+            bodyTemplateHTML = bodyTemplateHtml.get(0).html();
+        } else {
            emptyCartHtml = o.emptyCartTemplate;
            bodyTemplateHtml = _.template(o.bodyTemplate, {emptyCartMessage: emptyCartHtml});
         }
@@ -182,21 +194,27 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
         // insert the totals
         totalTemplateHtml = $('#drMiniCartTotalTemplate');
-        if (!totalTemplateHtml.length) {
+        if (totalTemplateHtml.length) {
+            totalTemplateHtml = totalTemplateHtml.get(0).html();
+        } else {
             totalTemplateHtml = _.template(o.totalsTemplate);
         }
         $cart.append(totalTemplateHtml);
 
         // insert the coupon code block
-        couponTemplateHtml = $('#drMiniCartTotalTemplate');
-        if (!couponTemplateHtml.length) {
+        couponTemplateHtml = $('#drMiniCartCouponTemplate');
+        if (couponTemplateHtml.length) {
+            couponTemplateHtml = couponTemplateHtml.get(0).html();
+        } else {
             couponTemplateHtml = _.template(o.couponTemplate);
         }
         $cart.append(couponTemplateHtml);
 
         // insert the footer
-        footerTemplateHtml = $('#drMiniCartTotalTemplate');
-        if (!footerTemplateHtml.length) {
+        footerTemplateHtml = $('#drMiniCartFooterTemplate');
+        if (footerTemplateHtml.length) {
+            footerTemplateHtml = _.template(footerTemplateHtml.html());
+        } else {
             footerTemplateHtml = _.template(o.footerTemplate);
         }
         $cart.append(footerTemplateHtml);

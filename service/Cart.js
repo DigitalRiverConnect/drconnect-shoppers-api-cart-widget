@@ -133,7 +133,7 @@ define(['util/Class', 'service/BaseService', 'config', 'lib/q', 'util/util'], fu
 
         getWebCheckoutUrl: function() {
             return this._client.connect().then(function(access_token){
-                return config.getWebCheckoutUrl() + '?token=' + access_token + '&themeID=11156900';
+                return config.getWebCheckoutUrl() + '?token=' + access_token;
             }, function() {
                 return "Unable to checkout";
             });

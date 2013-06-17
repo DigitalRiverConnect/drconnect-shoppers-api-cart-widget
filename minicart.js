@@ -42,7 +42,7 @@ define([
                         cartView.setCartQuantity(cartData.totalItemsInCart);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                         $btn.removeClass('disabled');
-                        cartView.showFeedback("Item added to cart.");
+                        cartView.showFeedback("Item added to cart");
                     }
                 }, function(err) {
                     $btn.removeClass('disabled');
