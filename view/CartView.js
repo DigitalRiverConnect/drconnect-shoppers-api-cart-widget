@@ -2,7 +2,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
     var defaults = {
         summaryTemplate :
         '<div class="connect-cart-summary">' +
-            '<h3><span>Shopping Cart</span> (<span class="connect-cart-quantity">0</span>)</h3>' +
+            '<h3><span>Shopping Cart</span> (<span class="connect-cart-quantity"><%= qty %></span>)</h3>' +
         '</div>',
 
         cartTemplate : '<div id="drMiniCart" class="connect-mini-cart"></div>',
@@ -141,19 +141,12 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
     };
 
     // Utility Functions
-    function createCartSummary() {
+    function createCartSummary(cartData) {
         var self = this,
-            o = self.getOptions(),
-            summaryTemplateHTML;
+            o = self.getOptions();
 
-        // TODO if an summaryAnchorSelector is not provided, insert an element in the DOM
-        summaryTemplateHTML = $('#drMiniCartSummaryTemplate');
-        if (summaryTemplateHTML.length) {
-            summaryTemplateHTML = summaryTemplateHTML.html();
-        } else {
-            summaryTemplateHTML = self.summaryTemplate();
-        }
-        $(o.summaryElementSelector).append(_.template(summaryTemplateHTML));
+        // TODO if an summaryAnchorSelector is not provide, insert an element in the DOM
+        $(o.summaryElementSelector).append(self.summaryTemplate(cartData));
     }
 
     // these templates are only used once so they are not compiled.
@@ -228,7 +221,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
 
             self._super.apply(self, arguments);
 
-            createCartSummary.call(self);
+            createCartSummary.call(self, {qty: 0, subtotal: "0.0"});
             createCart.call(self);
 
             $cart = $(self.getOption('cartElementSelector'));
@@ -259,15 +252,56 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         // @override
         compileTemplates : function() {
             var self = this;
-            self.summaryTemplate = _.template(self.getOption('summaryTemplate'));
-            self.cartTemplate = _.template(self.getOption('cartTemplate'));
-            self.cartOfferTemplate = _.template(self.getOption('offerTemplate'));
+            self.compileSummaryTemplate();
+            self.compileCartOfferTemplate();
             self.offerHeaderTemplate = _.template(self.getOption('offerHeaderTemplate'));
-            self.productTemplate = _.template(self.getOption('productTemplate'));
-            self.subtotalTemplate = _.template(self.getOption('subtotalTemplate'));
+            self.compileProductTemplate();
+            self.compileSubtotalTemplate();
             self.feedbackTemplate = _.template(self.getOption('feedbackTemplate'));
             self.errorTemplate = _.template(self.getOption('errorTemplate'));
             self.emptyCartTemplate = _.template(self.getOption('emptyCartTemplate'));
+        },
+
+        compileSummaryTemplate : function() {
+            var self = this,
+                summaryTemplateHTML = $('#drMiniCartSummaryTemplate');
+
+            // check to see if the summary template is overridden in the implementation.
+            if (summaryTemplateHTML.length) {
+                self.summaryTemplate = _.template(summaryTemplateHTML.html());
+            } else {
+                self.summaryTemplate = _.template(self.getOption('summaryTemplate'));
+            }
+        },
+
+        compileCartOfferTemplate : function() {
+            var self = this, cartOfferTemplateHTML = $('#drMiniCartOfferTemplate');
+
+            if (cartOfferTemplateHTML.length) {
+                self.cartOfferTemplate = _.template(cartOfferTemplateHTML.html());
+            } else {
+                self.cartOfferTemplate = _.template(self.getOption('offerTemplate'));
+            }
+        },
+
+        compileProductTemplate : function() {
+            var self = this, productTemplateHTML = $('#drMiniCartProductTemplate');
+
+            if (productTemplateHTML.length) {
+                debugger;
+                self.productTemplate = _.template(productTemplateHTML.html());
+            } else {
+                self.productTemplate = _.template(self.getOption('productTemplate'));
+            }
+        },
+
+        compileSubtotalTemplate : function() {
+            var self = this, subtotaTemplateHTML = $('#drMiniCartSubtotalTemplate');
+            if (subtotaTemplateHTML.length) {
+                self.subtotalTemplate = _.template(subtotaTemplateHTML.html());
+            } else {
+                self.subtotalTemplate = _.template(self.getOption('subtotalTemplate'));
+            }
         },
         // @override 
         setOptions : function(options) {
@@ -281,12 +315,22 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             this._super.apply(this, [options]);
         },
 
-        setCartQuantity : function(qty) {
+        updateCartSummary : function(cartData) {
             var self = this,
-                $el = $(self.getOption('summaryElementSelector'));
+                $el = $(self.getOption('summaryElementSelector')),
+                data = {}, html;
+
+            // make sure that values exist
+            data.qty = cartData.totalItemsInCart || '0';
+            if (cartData.pricing != null) {
+                data.subtotal = cartData.pricing.formattedOrderTotal;
+            } else {
+                data.subtotal = '0.0';
+            }
 
             if ($el.length) {
-                $el.find('.connect-cart-quantity').empty().text(qty);
+                html = self.summaryTemplate(data);
+                $el.html(html);
             }
         },
         /**

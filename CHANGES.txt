@@ -1,3 +1,10 @@
+Version 1.5b
+    * Re-factored update summar logic
+    * Added template logic to customize cart summary
+    * Added logic to allow template customization of product
+      and offer templates.
+    * Removed button styling from the css
+
 Version 1.4b
     * Fixed selectors for template customization
     * Removed hard-coded theme id left from testing

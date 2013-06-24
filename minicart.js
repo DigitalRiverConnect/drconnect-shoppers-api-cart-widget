@@ -39,7 +39,7 @@ define([
                         // we returned a url; follow it.
                         window.location.href = cartData;
                     } else {
-                        cartView.setCartQuantity(cartData.totalItemsInCart);
+                        cartView.updateCartSummary(cartData);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                         $btn.removeClass('disabled');
                         cartView.showFeedback("Item added to cart");
@@ -89,7 +89,7 @@ define([
                 // if the item cannot be added to the cart, follow the link
                 cartService.addLineItemToCart(btn.value).then(function(cartData) {
                     cartView.showFeedback("Item added to cart.");
-                    cartView.setCartQuantity(cartData.totalItemsInCart);
+                    cartView.updateCartSummary(cartData);
                     cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                     // TODO this should include a reference to the line item updated.
                     $el.trigger('drconnect-addtocart', [cartData]);
@@ -109,7 +109,7 @@ define([
                             $el.trigger('drconnect-updatequantity', [lineItemId, qty, field]);
                             cartService.updateQuantity(lineItemId, qty).then(function(cartData) {
                                 cartView.showFeedback("Quantity Updated");
-                                cartView.setCartQuantity(cartData.totalItemsInCart);
+                                cartView.updateCartSummary(cartData);
                                 cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                             }, function(err) {
                                 cartView.showFeedback("Unable to Update", true);
@@ -127,7 +127,7 @@ define([
                     cartService.removeLineItem(lineItemId).then(function(cartData) {
                         $el.trigger('drconnect-remove', [lineItemId]);
                         cartView.showFeedback("Item removed");
-                        cartView.setCartQuantity(cartData.totalItemsInCart);
+                        cartView.updateCartSummary(cartData);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                     });
                 }
@@ -148,7 +148,7 @@ define([
                 }).done(function() {
                     cartService.clearCache();
                     cartService.getActiveCart().then(function(cartData) {
-                        cartView.setCartQuantity(cartData.totalItemsInCart);
+                        cartView.updateCartSummary(cartData);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                     });
                 });
@@ -159,7 +159,7 @@ define([
                         // $el.trigger('drconnect-applycoupon', [v, field, cartData]);
                         cartView.showFeedback("Coupon code applied. Final price will be determined at checkout.");
                         $(field).val("");
-                        cartView.setCartQuantity(cartData.totalItemsInCart);
+                        cartView.updateCartSummary(cartData);
                         cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                         cartView.hideCouponEntry();
                     });
@@ -182,13 +182,13 @@ define([
             cartView.blockCartUI();
             cartService.getActiveCart().then(function(cartData) {
                 if (cartData.pricing && cartData.pricing.orderTotal) {
-                    cartView.setCartQuantity(cartData.totalItemsInCart);
+                    cartView.updateCartSummary(cartData);
                     cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                     cartView.setCurrency(cartData.pricing.orderTotal.currency);
                 } else {
                     self.client.shopperService.list().then(function(shopper) {
                         if (shopper.currency) {
-                            cartView.setCartQuantity(cartData.totalItemsInCart);
+                            cartView.updateCartSummary(cartData);
                             cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                             cartView.setCurrency(shopper.currency);
                         } else {
@@ -197,7 +197,7 @@ define([
                                 currency: config.getDefaultCurrency(),
                                 locale: config.getDefaultLocale()
                             }).then(function(s) {
-                                cartView.setCartQuantity(cartData.totalItemsInCart);
+                                cartView.updateCartSummary(cartData);
                                 cartView.updateCart(cartData, cartService.getEmptyCartOffer());
                             });
                         }
