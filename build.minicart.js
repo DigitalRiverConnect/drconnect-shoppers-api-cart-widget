@@ -10,5 +10,5 @@
     },
     // optimize: "none",
     include: ['minicart'],
-    out: "output/mini-cart.min.js"
+    out: "../../demo-ap/beacon/DRUI/webapps/cart-widget/js/mini-cart.min.js"
 }
