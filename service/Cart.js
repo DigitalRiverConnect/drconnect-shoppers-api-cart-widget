@@ -11,7 +11,7 @@ define(['util/Class', 'service/BaseService', 'config', 'lib/q', 'util/util'], fu
         getActiveCart : function() {
             var self = this;
             return this.list(config.getCartResourceUrl(), {
-                expand:'all,pricing.all,lineitems.lineitem.product,lineitems.lineitem.pricing.all,shippingOptions,shippingMethods'
+                expand:'pricing.all,lineitems.lineitem.product,lineitems.lineitem.pricing.all,shippingOptions,shippingMethods'
             }).then(function(data) {
                 return data.cart;
             });

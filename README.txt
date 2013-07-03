@@ -80,7 +80,8 @@ Example Constructor
 
 Arguments to the Constructor
 Name                Type                Required
-apiKey              String              yes
+apiKey              String              yes*
+client              api/Client Object   yes*
 siteId              String              yes
 vanityDomain        String              No (default 'store.digitalriver.com')
 cartElement         String              No (default 'drMiniCart')
@@ -91,6 +92,24 @@ emptyOfferId        String              No
 emptyOfferPop       String              No (default ‘SiteMerchandising_EmptyCart’)
 rewriteLinks        Boolean             No (default true)
 
+* use either a fully constructed client object or an api key. If a constructed client
+object is passed, apiKey is ignored. If not, it will be used to constuct a client object.
+
+Accessing Other Modules
+Other script modules can be pulled in to the require block as needed. The most common
+uses would be to pull in the api/Client module to construct a client to share between
+to applications. 
+
+<script>
+    requirejs(["minicart", "api/Client"], function(MiniCart, Client) {
+        var client = new Client('69ae4fa2eb7bc4dc5057d4b17356c8ca');
+        var cart = new MiniCart({
+            client: client,
+            siteId: 'shopme'
+        });
+        // do something else with client.
+    });
+</script>
 
 
 copyright 2013 Digital River, Inc.

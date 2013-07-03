@@ -65,8 +65,13 @@ define([
             self.setOptions(options);
             o = self.getOptions();
 
-            // TODO check to make sure that API key exists
-            self.client = new Client(options.apiKey);
+            // check to see if we passed in a constructed client or an apiKey
+            if (o.client && o.client instanceof Client) {
+                self.client = o.client;
+            } else if (o.apiKey) {
+                // TODO check to make sure that API key exists
+                self.client = new Client(o.apiKey);
+            }
 
             // TODO make sure that client is constructed properly
             cartService = new Cart(self.client);
