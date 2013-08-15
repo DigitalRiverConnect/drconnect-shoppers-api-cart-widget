@@ -6,25 +6,25 @@ define(['util/Class', 'connection/Connection'], function(Class, Connection) {
             self._connection = new Connection();
         },
 
-        list : function(uri, params) {
+        list : function(uri, params, cache) {
             var self = this;
             uri = uri || self.uri;
 
             return self._client.connect()
                 .then(function(access_token) {
                     var urlParams = self._makeQueryParams({token: access_token}, params);
-                    return self._connection.request(uri, 'GET', urlParams);
+                    return self._connection.request(uri, 'GET', urlParams, cache);
                 });
         },
 
-        get : function(id, params) {
+        get : function(id, params, cache) {
             var self = this,
                 uri = [self.uri, id].join("/");
 
             return self._client.connect()
                 .then(function(access_token){
                     var urlParams = self._makeQueryParams({token: access_token}, params);
-                    return self._connection.request(uri, 'GET', urlParams);
+                    return self._connection.request(uri, 'GET', urlParams, cache);
                 });
         },
 
@@ -46,7 +46,7 @@ define(['util/Class', 'connection/Connection'], function(Class, Connection) {
             return self._client.connect()
                 .then(function(access_token) {
                     var urlParams = self._makeQueryParams({token: access_token}, params);
-                    return self._connection.request(uri, 'DELETE', urlParams);                    
+                    return self._connection.request(uri, 'DELETE', urlParams);
                 });
         },
 
