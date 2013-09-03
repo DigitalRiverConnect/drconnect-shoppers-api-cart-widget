@@ -3,7 +3,7 @@
 define([
         'api/Client',
         'config',
-        'service/Cart',
+        'service/CartService',
         'view/CartView',
         'util/Class'
     ], function(Client, config, Cart, CartView, Class) {

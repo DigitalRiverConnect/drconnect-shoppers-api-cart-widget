@@ -1,4 +1,5 @@
-{baseUrl : './',
+{
+    baseUrl : './',
     shim : {
         "lib/underscore" : {
             exports : '_'
@@ -9,6 +10,6 @@
         underscore: 'lib/underscore'
     },
     // optimize: "none",
-    include: ['minicart'],
-    out: "../../demo-ap/beacon/DRUI/webapps/cart-widget/js/mini-cart.min.js"
+    include: ['dr-minicart'],
+    out: "output/mini-cart.min.js"
 }
