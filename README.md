@@ -75,10 +75,10 @@ See the example HTML file and constructor arguments.
     <th>Name</th><th>Type</th><th>Required</th>
 </tr>
 <tr>
-    <td>apiKey</td><td>String</td><td>yes\*</td>
+    <td>apiKey</td><td>String</td><td>yes*</td>
 </tr>
 <tr>
-    <td>client</td><td>api/Client Object</td><td>yes\*</td>
+    <td>client</td><td>api/Client Object</td><td>yes*</td>
 </tr>
 <tr>
     <td>siteId</td><td>String</td><td>yes</td>
