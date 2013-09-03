@@ -1,19 +1,21 @@
-AMD
+##AMD
 The project is built using the requirejs Ansynchronis Module Definition (AMD) 
 framework.For more information, see the requirejs web site: 
 http://requirejs.org/
 
-Almond
+##Almond
 To keep the files smaller, the project uses Almond, a replacement AMD loader
 for RequireJS:
 
 https://github.com/jrburke/almond
 
-To Build the Optimized Project
+###To Build the Optimized Project
 The optimzer for Require - r.js - requires Node.js or Rhino.jar. To build
 with Node, use the following command from the project root directory
 
+```
  > node rq/node_modules/requirejs/bin/r.js -o build.minicart.js name=rq/almond
+```
 
 By default this will put the optimized file mini-cart.min.js in the output
 directory. You can be change the build options by editing the build.minicart.js
@@ -22,7 +24,7 @@ file in the root directory.
 See http://nodejs.org/ for instructions on downloading and configuring node.
 
 
-To Deploy the Mini-cart
+###To Deploy the Mini-cart
 1. Copy the CSS files in the /css folder in the project root and put them where you
 would normally keep css files. There are two files to copy:
     /css/connect-mini-cart.css - contains positioning rules; edit with caution
@@ -34,8 +36,9 @@ the output directory to your project.
 3. Create an HTML file and reference the JavaScript and CSS from steps 1 and 2. Add
 HTML elements for the mini-cart and cart summary. 
 
-Example HTML File
+###Example HTML File
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,14 +63,14 @@ Example HTML File
     </script>
 </body>
 </html>
-
+```
 
 4. Create a constructor script
 The constructor is used to set options such as API Key and currency at runtime. . An example
 placement is shown in step 3.
 
 
-Example Constructor
+###Example Constructor
 
 <script>
     requirejs(["minicart"], function(MiniCart) {
@@ -78,7 +81,7 @@ Example Constructor
     });
 </script>
 
-Arguments to the Constructor
+####Arguments to the Constructor
 Name                Type                Required
 apiKey              String              yes*
 client              api/Client Object   yes*
@@ -92,14 +95,14 @@ emptyOfferId        String              No
 emptyOfferPop       String              No (default ‘SiteMerchandising_EmptyCart’)
 rewriteLinks        Boolean             No (default true)
 
-* use either a fully constructed client object or an api key. If a constructed client
+\* use either a fully constructed client object or an api key. If a constructed client
 object is passed, apiKey is ignored. If not, it will be used to constuct a client object.
 
-Accessing Other Modules
+##Accessing Other Modules
 Other script modules can be pulled in to the require block as needed. The most common
 uses would be to pull in the api/Client module to construct a client to share between
 to applications. 
-
+```javascript
 <script>
     requirejs(["minicart", "api/Client"], function(MiniCart, Client) {
         var client = new Client('69ae4fa2eb7bc4dc5057d4b17356c8ca');
@@ -110,6 +113,6 @@ to applications.
         // do something else with client.
     });
 </script>
-
+```
 
 copyright 2013 Digital River, Inc.
