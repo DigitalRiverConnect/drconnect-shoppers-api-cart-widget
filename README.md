@@ -34,7 +34,11 @@ would normally keep css files. There are two files to copy:
 the output directory to your project.
 
 3. Create an HTML file and reference the JavaScript and CSS from steps 1 and 2. Add
-HTML elements for the mini-cart and cart summary. 
+HTML elements for the mini-cart and cart summary.
+
+4. Create a constructor script
+The constructor is used to set options such as API Key and currency at runtime. See the
+examople HTML file.
 
 ###Example HTML File
 
@@ -54,32 +58,17 @@ HTML elements for the mini-cart and cart summary.
     <div id="drMiniCartSummary"></div>
     <div id="drMiniCart"></div>
     <script>
-        // the mini-cart constructor
+        // Example mini-cart constructor
         requirejs(["minicart"], function(MiniCart) {
             var cart = new MiniCart({
-                apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca'
+                apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca',
+                siteId: 'shopme'
             });
         });
     </script>
 </body>
 </html>
 ```
-
-4. Create a constructor script
-The constructor is used to set options such as API Key and currency at runtime. . An example
-placement is shown in step 3.
-
-
-###Example Constructor
-
-<script>
-    requirejs(["minicart"], function(MiniCart) {
-        var cart = new MiniCart({
-            apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca',
-            siteId: 'shopme'
-        });
-    });
-</script>
 
 ####Arguments to the Constructor
 Name                Type                Required
