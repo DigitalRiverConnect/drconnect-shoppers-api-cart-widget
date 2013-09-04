@@ -127,4 +127,4 @@ to applications.
 </script>
 ```
 
-copyright 2013 Digital River, Inc.
+Copyright 2013 Digital River, Inc.
