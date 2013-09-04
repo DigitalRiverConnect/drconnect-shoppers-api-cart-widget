@@ -1,13 +1,10 @@
 ###AMD
-The project is built using the requirejs Ansynchronis Module Definition (AMD) 
-framework.For more information, see the requirejs web site: 
-http://requirejs.org/
+The project is built using the requirejs Asynchronous Module Definition (AMD) 
+framework. For more information, see the [requirejs](http://requirejs.org/ "Link to requirejs") web site.
 
 ###Almond
-To keep the files smaller, the project uses Almond, a replacement AMD loader
-for RequireJS:
-
-https://github.com/jrburke/almond
+To keep the files smaller, the project uses [Almond](https://github.com/jrburke/almond "Link to Almond GitHub"), a replacement AMD loader
+for RequireJS.
 
 ###To Build the Optimized Project
 The optimzer for Require - r.js - requires Node.js or Rhino.jar. To build
@@ -21,7 +18,7 @@ By default this will put the optimized file mini-cart.min.js in the output
 directory. You can be change the build options by editing the build.minicart.js
 file in the root directory.
 
-See http://nodejs.org/ for instructions on downloading and configuring node.
+See [NodeJS.org](http://nodejs.org/ "Link to Node.JS") for instructions on downloading and configuring node.
 
 
 ###To Deploy the Mini-cart
@@ -125,7 +122,7 @@ to applications.
             client: client,
             siteId: 'shopme'
         });
-        // do something else with client.
+        // Use client in some other widget code.
     });
 </script>
 ```
