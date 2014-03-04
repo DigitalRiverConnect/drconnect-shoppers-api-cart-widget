@@ -112,7 +112,7 @@ See the example HTML file and constructor arguments.
 </table>
 
 \* _use either a fully constructed client object or an api key. If a constructed client
-object is passed, apiKey is ignored. If not, it will be used to constuct a client object._
+object is passed, apiKey is ignored. If not, it will be used to construct a client object._
 
 ###Accessing Other Modules
 Other script modules can be pulled in to the require block as needed. The most common
