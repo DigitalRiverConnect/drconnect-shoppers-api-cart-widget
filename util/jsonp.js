@@ -11,17 +11,17 @@
  * @dependency Q or an other library that supports CommonJS Promises/A API
  * @dependency underscore The underscore library, or another library that provides
  * a shim to map and forEach for supporting browsers still using ECMA 3.
- * 
- * jslint browser: true, nomen: true, sloppy: true 
+ *
+ * jslint browser: true, nomen: true, sloppy: true
  * using sloppy here for performance, but strict practices apply
  * 
  */
-define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) {
-    var jsonp, JsonpError = function(name, message, options) {
+define(['lib/q', 'lib/underscore', 'lib/json2'], function (promisesLib, _, JSON) {
+    var jsonp, JsonpError = function (name, message, options) {
         this.name = name;
         this.message = message;
         this.value = options;
-        this.toString = function() {
+        this.toString = function () {
             return this.name + ": " + this.message + " " + options.join(",");
         };
     };
@@ -37,7 +37,7 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
          *      API server as a string value.
          * @param {Object} urlParams An object to be encoded on the URL 
          */
-        getJSON: function(uri, method, urlParams) {
+        getJSON: function (uri, method, urlParams) {
             var defer = promisesLib.defer(),
                 self = this,
                 fnName,
@@ -46,7 +46,7 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
                 script;
 
             // encode the URL parameters
-            qstringParams = _.map(urlParams, function(v, k) {
+            qstringParams = _.map(urlParams, function (v, k) {
                 return encodeURIComponent(k) + '=' + encodeURIComponent(v);
             });
 
@@ -74,10 +74,10 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
             script = document.getElementsByTagName('HEAD')[0].appendChild(scriptTag);
 
             // to handle scripts that return 201 or 204 and don't have a payload
-            script.onload = script.onreadystatechange = function() {
+            script.onload = script.onreadystatechange = function () {
                 if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
                     // wait briefly then if the promise is still pending, fulfill it with a simple json payload
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (defer.promise.isPending() && window[fnName]) {
                             window[fnName]({"success" : true});
                         }
@@ -88,7 +88,7 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
             };
 
             script.onerror = function () {
-                setTimeout(function() {
+                setTimeout(function () {
                     if (defer.promise.isPending() && window[fnName]) {
                         defer.reject(new JsonpError("Server Error", "", qstringParams));
                     }
@@ -96,7 +96,7 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
             };
 
             // clean up global function and remove script after the function runs.
-            return defer.promise.then(function(data) {
+            return defer.promise.then(function (data) {
                 window[fnName] = undefined;
                 try {
                     delete window[fnName];
@@ -112,7 +112,7 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
 
                 // chain the promise
                 return data;
-            }, function(err) {
+            }, function (err) {
                 window[fnName] = undefined;
                 try {
                     delete window[fnName];
@@ -133,9 +133,9 @@ define(['lib/q', 'lib/underscore', 'lib/json2'], function(promisesLib, _, JSON) 
          * Resolves the passed promise.
          * @param {Promise} defer A CommonJS Promise/A API promise Object
          */
-        evalJSONP: function(promise) {
+        evalJSONP: function (promise) {
             // return a closure to run when the script is loaded
-            return function(data) {
+            return function (data) {
                 var validJSON = false;
                 if (typeof data === "string") {
                     try {

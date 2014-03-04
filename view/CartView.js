@@ -1,4 +1,4 @@
-define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
+define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
     var defaults = {
         summaryTemplate :
         '<div class="connect-cart-summary">' +
@@ -11,7 +11,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '<div class="connect-cart-header">' +
         '   <div class="connect-cart-feedback"></div>' +
         '   <div class="connect-cart-currency">' +
-        '       <label for="drCartCurrencySelector">Currency:</label>'+
+        '       <label for="drCartCurrencySelector">Currency:</label>' +
         '       <select id="drCartCurrencySelector" class="connect-cart-currencyselector">' +
         '       </select>' +
         '   </div>' +
@@ -23,7 +23,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '   <div class="connect-cart-loadingmask">' +
         '      <span class="connect-spinner"></span>' +
         '   </div>' +
-        '   <div class="connect-content">'+
+        '   <div class="connect-content">' +
         '       <%= emptyCartMessage %>' +
         '   </div>' +
         '</div>',
@@ -68,13 +68,13 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '<div class="connect-cart-offer">' +
             '<p class="connect-cart-title"><%= product.displayName %></p>' +
             '<% if (pricing && (pricing.listPrice.value > pricing.salePriceWithQuantity.value)) { %>' +
-            '<p><img class="connect-cart-image" src="<%= product.thumbnailImage %>" alt=""/>'+
+            '<p><img class="connect-cart-image" src="<%= product.thumbnailImage %>" alt=""/>' +
             '<span class="connect-cart-pricing"><span>Regular Price: </span>' +
             '<span class="connect-widget-strikethrough"><del><%= pricing.formattedListPrice %></del></span></span>' +
             '<span class="connect-cart-pricing"><span>Promo Price: </span>' +
             '<span><%= pricing.formattedSalePriceWithQuantity %></span></span>' +
             '<%} else { %>'  +
-            '<p><img class="connect-cart-image" src="<%= product.thumbnailImage %>" alt=""/>'+
+            '<p><img class="connect-cart-image" src="<%= product.thumbnailImage %>" alt=""/>' +
             '<span class="connect-cart-pricing"><%= pricing.formattedSalePriceWithQuantity %></span>' +
             '<% } %>' +
             '<div class="connect-widget-button"><a class="connect-cart-buy" data-value="<%= addProductToCart.uri %>" href="<%= addProductToCart.uri %>">' +
@@ -85,7 +85,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         productTemplate :
         '<div class="connect-cart-lineitem">' +
             '<p class="connect-cart-title" title="<%= product.shortDescription %>"><%= product.displayName %></p>' +
-            '<img src="<%= product.thumbnailImage %>"/>' + 
+            '<img src="<%= product.thumbnailImage %>"/>' +
             '<div><span>Quantity: </span>' +
             '   <input autocomplete="off" type="text" class="connect-cart-quantity" data-lineitem-id="<%= id %>" value="<%= quantity %>"' +
             '<% if (product.inventoryStatus && product.inventoryStatus.maxOrderQuantity !== undefined){ %>' +
@@ -100,7 +100,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                 //'<li class="connect-cart-producttype">Product Type: <span><%= product.productType %></span></li>' +
                 '<li class="connect-lineitem-pricing">' +
                     '<span class="connect-cart-label">Price: </span>' +
-                    '<% if (pricing.listPriceWithQuantity.value > pricing.salePriceWithQuantity.value) { %> ' + 
+                    '<% if (pricing.listPriceWithQuantity.value > pricing.salePriceWithQuantity.value) { %> ' +
                     '<span class="connect-widget-strikethrough"><%= pricing.formattedListPriceWithQuantity %>&nbsp;</span>' +
                     '<%}%>' +
                     '<span class="connect-lineitem-saleprice"><%= pricing.formattedSalePriceWithQuantity %></span>' +
@@ -120,7 +120,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         '</div> <%}%>' +
         '<div class="connect-cart-subtotal">' +
             '<span>Subtotal: </span><span class="amount"><%= formattedOrderTotal %></span>' +
-        '</div>'+
+        '</div>' +
         '<div class="connect-fine-print">' +
             '<span>Excludes tax</span>' +
         '</div>',
@@ -128,7 +128,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         feedbackTemplate :
         '<p><i class="icon-ok-sign"></i> <%= msg %></p>',
 
-        errorTemplate: 
+        errorTemplate:
         '<p><i class="icon-warning-sign"></i> <%= msg %></p>',
 
         // the default cart element
@@ -166,8 +166,8 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
         $cart.prepend(headerTemplateHtml);
 
         // add the currencies ...
-        _.each(o.currency, function(cv) {
-            $option = $('<option value="' + cv + '">' + cv +'</option>');
+        _.each(o.currency, function (cv) {
+            $option = $('<option value="' + cv + '">' + cv + '</option>');
             if (cv === o.defaultCurrency) {
                 $option.attr("selected", "selected");
             }
@@ -180,8 +180,8 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             emptyCartHtml = o.emptyCartTemplate;
             bodyTemplateHTML = bodyTemplateHtml.get(0).html();
         } else {
-           emptyCartHtml = o.emptyCartTemplate;
-           bodyTemplateHtml = _.template(o.bodyTemplate, {emptyCartMessage: emptyCartHtml});
+            emptyCartHtml = o.emptyCartTemplate;
+            bodyTemplateHtml = _.template(o.bodyTemplate, {emptyCartMessage: emptyCartHtml});
         }
         $cart.append(bodyTemplateHtml);
 
@@ -216,7 +216,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
     // Main object
     return BaseView.extend({
         // @override - the constructor function
-        init: function(options) {
+        init: function (options) {
             var self = this, $cart;
 
             self._super.apply(self, arguments);
@@ -225,20 +225,20 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             createCart.call(self);
 
             $cart = $(self.getOption('cartElementSelector'));
-            $cart.on('change', '.connect-cart-currencyselector', function() {
+            $cart.on('change', '.connect-cart-currencyselector', function () {
                 var v = $(this).val();
                 $(self).trigger('drconnect-changecurrency', [v]);
             });
 
             // set up the listener for have promo code link? 
-            $cart.find('.connect-cart-showcode').on("click", function(evt){
+            $cart.find('.connect-cart-showcode').on("click", function (evt) {
                 evt.preventDefault();
                 $(this).hide();
                 $cart.find('.connect-cart-couponwrapper').show().find('> input').select().focus();
             });
 
             // set up the listener for the coupon code input 
-            $('#couponCode').on("keypress paste", function() {
+            $('#couponCode').on("keypress paste", function () {
                 var $link = $(this);
                 if ($link.val() !== '' || $link.val() != null) { // != for null or undefined
                     $link.parent('.connect-cart-couponwrapper').find('>a[class^="connect-"]').removeAttr('disabled');
@@ -246,11 +246,11 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             });
         },
         // @override
-        getDefaults : function() {
+        getDefaults : function () {
             return defaults;
         },
         // @override
-        compileTemplates : function() {
+        compileTemplates : function () {
             var self = this;
             self.compileSummaryTemplate();
             self.compileCartOfferTemplate();
@@ -262,7 +262,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             self.emptyCartTemplate = _.template(self.getOption('emptyCartTemplate'));
         },
 
-        compileSummaryTemplate : function() {
+        compileSummaryTemplate : function () {
             var self = this,
                 summaryTemplateHTML = $('#drMiniCartSummaryTemplate');
 
@@ -274,7 +274,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             }
         },
 
-        compileCartOfferTemplate : function() {
+        compileCartOfferTemplate : function () {
             var self = this, cartOfferTemplateHTML = $('#drMiniCartOfferTemplate');
 
             if (cartOfferTemplateHTML.length) {
@@ -284,18 +284,17 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             }
         },
 
-        compileProductTemplate : function() {
+        compileProductTemplate : function () {
             var self = this, productTemplateHTML = $('#drMiniCartProductTemplate');
 
             if (productTemplateHTML.length) {
-                debugger;
                 self.productTemplate = _.template(productTemplateHTML.html());
             } else {
                 self.productTemplate = _.template(self.getOption('productTemplate'));
             }
         },
 
-        compileSubtotalTemplate : function() {
+        compileSubtotalTemplate : function () {
             var self = this, subtotaTemplateHTML = $('#drMiniCartSubtotalTemplate');
             if (subtotaTemplateHTML.length) {
                 self.subtotalTemplate = _.template(subtotaTemplateHTML.html());
@@ -304,7 +303,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             }
         },
         // @override 
-        setOptions : function(options) {
+        setOptions : function (options) {
             if (options.summaryElement) {
                 options.summaryElementSelector = "#" + options.summaryElement;
             }
@@ -315,7 +314,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             this._super.apply(this, [options]);
         },
 
-        updateCartSummary : function(cartData) {
+        updateCartSummary : function (cartData) {
             var self = this,
                 $el = $(self.getOption('summaryElementSelector')),
                 data = {}, html;
@@ -339,7 +338,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
          * @param {Promise} emptyOffers
          * 
          */
-        updateCart : function(cartData, emptyOffers) {
+        updateCart : function (cartData, emptyOffers) {
             var self = this,
                 $cart = $(self.getOption('cartElementSelector'));
 
@@ -348,14 +347,14 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             if (cartData.lineItems && cartData.lineItems.lineItem && cartData.lineItems.lineItem.length) {
                 self.showLineItems($cart, cartData);
             } else {
-                emptyOffers.then(function(offer) {
+                emptyOffers.then(function (offer) {
                     self.showEmptyCartOffers($cart, offer);
                 });
             }
             $(self).trigger('drconnect-cartrender');
         },
 
-        showLineItems : function($cart, cartData) {
+        showLineItems : function ($cart, cartData) {
             var self = this,
                 items = [];
 
@@ -379,11 +378,11 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             $(self).trigger('drconnect-updatecart', [cartData]);
         },
 
-        renderLineItems : function($cart, lineItems) {
+        renderLineItems : function ($cart, lineItems) {
             var self = this,
                 html = "";
 
-            _.each(lineItems, function(lineItem) {
+            _.each(lineItems, function (lineItem) {
                 var product, inventoryStatus, availableQuantity;
                 if (lineItem && lineItem.product !== undefined && lineItem.product.inventoryStatus !== undefined) {
                     // make local references for speed/convenience
@@ -419,37 +418,37 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             $cart.find('.connect-cart-body .connect-content').empty().html(html).end();
         },
 
-        setupEventListeners : function($cart) {
+        setupEventListeners : function ($cart) {
             var self = this;
 
             if (!$cart.hasClass('initialized')) {
                 $cart.addClass('initialized')
-                    .on('keypress', 'input[type="text"]', function(evt) {
+                    .on('keypress', 'input[type="text"]', function (evt) {
                         // listen for the enter key
                         if (evt.keyCode === 13) {
-                            $(self).trigger("drconnect-updatequantity", [this.value, this]) ;
+                            $(self).trigger("drconnect-updatequantity", [this.value, this]);
                         }
                         evt.stopImmediatePropagation(); // no other listeners fire
-                    }).on('click', '.connect-cart-remove a', function(evt) {
+                    }).on('click', '.connect-cart-remove a', function (evt) {
                         evt.preventDefault();
                         $(self).trigger('drconnect-remove', [this]);
-                    }).on("click", ".connect-cart-applycoupon", function() {
+                    }).on("click", ".connect-cart-applycoupon", function () {
                         if (!$(this).attr('disabled') && !$(this).hasClass('disabled')) {
                             var field = $('#couponCode').get(0);
                             $(self).trigger('drconnect-applycoupon', [field, this]);
                         }
                         return false; // prevent default and stop propagation
-                    }).on('click', '.connect-cart-buy', function(evt){
+                    }).on('click', '.connect-cart-buy', function (evt) {
                         evt.preventDefault();
                         // normalize this behavior for buttons or a tag
                         var v = this.value || this.href;
-                        $(self).trigger('drconnect-addtocart',[{value: v}, this]);
-                    }).on("click", ".connect-cart-updatebtn", function() {
+                        $(self).trigger('drconnect-addtocart', [{value: v}, this]);
+                    }).on("click", ".connect-cart-updatebtn", function () {
                         var $btn = $(this), $field;
-                        if (!$btn.attr('disabled') && !$btn.hasClass('disabled') ){
+                        if (!$btn.attr('disabled') && !$btn.hasClass('disabled')) {
                             $field = $btn.siblings('input[type="text"]');
                             if ($field.length && $field.val() > -1) {
-                                $(self).trigger("drconnect-updatequantity", [$field.val(), $field.get(0)]) ;
+                                $(self).trigger("drconnect-updatequantity", [$field.val(), $field.get(0)]);
                             }
                         }
                         return false;   // prevent default and stop propagation
@@ -457,7 +456,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             }
         },
 
-        updateCartSubtotal : function(cartData) {
+        updateCartSubtotal : function (cartData) {
             var self = this,
                 pricing = cartData.pricing,
                 $cart = $(self.getOption('cartElementSelector'));
@@ -482,7 +481,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             }
         },
 
-        showEmptyCartOffers : function($cart, offer) {
+        showEmptyCartOffers : function ($cart, offer) {
             var self = this;
 
             self.renderEmptyOffers($cart, offer);
@@ -495,7 +494,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             $(self).trigger('drconnect-updatecart', [offer]);
         },
 
-        renderEmptyOffers : function($cart, offer) {
+        renderEmptyOffers : function ($cart, offer) {
             var self = this, html = '', offers = [], i, l;
 
             try {
@@ -520,7 +519,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             $cart.find('.connect-cart-body .connect-content').empty().html(html).end();
         },
 
-        hideCouponEntry : function() {
+        hideCouponEntry : function () {
             var self = this, o = this.getOptions(), $cart;
 
             $cart = $(o.cartElementSelector);
@@ -532,7 +531,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             $cart.find('.connect-cart-showcode').show();
         },
 
-        setCurrency : function(v) {
+        setCurrency : function (v) {
             var self = this,
                 $cart = $(self.getOption('cartElementSelector')),
                 currencySelector;
@@ -541,7 +540,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             currencySelector.val(v);
         },
 
-        blockCartUI: function() {
+        blockCartUI: function () {
             var self = this,
                 $cart = $(self.getOption('cartElementSelector'));
 
@@ -550,11 +549,11 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
             // mask the cart by adding a class name
             $cart.find('.connect-cart-body').addClass('connect-loading')
                 .find('.connect-content').scrollTop(0).end()
-                .find('.connect-cart-currencyselector').attr('disabled','disabled');
+                .find('.connect-cart-currencyselector').attr('disabled', 'disabled');
         },
 
         unblockCartUI: function () {
-            var self = this, 
+            var self = this,
                 o = self.getOptions(),
                 $cart;
 
@@ -564,7 +563,7 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                 .find('.connect-cart-currencyselector').removeAttr('disabled');
         },
 
-        showFeedback : function(msg, isError) {
+        showFeedback : function (msg, isError) {
             var self = this, html,
                 $cart = $(self.getOption('cartElementSelector')),
                 $feedbackContainer = $cart.find('.connect-cart-feedback');
@@ -578,30 +577,30 @@ define(['lib/underscore', 'view/BaseView'], function(_, BaseView) {
                 self.feedbackTO = null;
 
                 // run the hide immediately to show the next message.
-                self.hideFeedback(function() {
-                     $feedbackContainer.toggleClass('connect-cart-error', isError).html(html).fadeIn();
-                });
+                self.hideFeedback(function () {
+                        $feedbackContainer.toggleClass('connect-cart-error', isError).html(html).fadeIn();
+                    });
             } else {
                 $feedbackContainer.toggleClass('connect-cart-error', isError).html(html).fadeIn();
             }
             // show the feedback div, set a time out to hide it.
-            self.feedbackTO = setTimeout(function() {
+            self.feedbackTO = setTimeout(function () {
                 self.hideFeedback();
             }, 5000);
         },
 
-        hideFeedback : function(callback) {
+        hideFeedback : function (callback) {
             var self = this,
                 $cart = $(self.getOption('cartElementSelector'));
 
-            $cart.find('.connect-cart-feedback').fadeOut(function() {
+            $cart.find('.connect-cart-feedback').fadeOut(function () {
                 if (typeof callback === "function") {
                     callback.call(this);
                 }
             });
         },
 
-        getCartElement : function() {
+        getCartElement : function () {
             return $(this.getOption('cartElementSelector'));
         }
     });

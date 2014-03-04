@@ -1,4 +1,4 @@
-define([], function() {
+define([], function () {
     // create a private connection object
     var config = {
         env: 'prod',

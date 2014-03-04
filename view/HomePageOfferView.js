@@ -1,7 +1,7 @@
 /*jslint browser: true, nomen: true, sloppy: true, white: true */
 define(['underscore', 'view/BaseView'], function(_, BaseView) {
     var defaults = {
-        offerTemplate : 
+        offerTemplate :
         '<div class="connect-product-offer span4">' +
             '<p class="connect-cart-title"><%= displayName %></p>' +
             '<% if (pricing && (pricing.listPrice.value > pricing.salePriceWithQuantity.value)) { %>' +
@@ -16,7 +16,7 @@ define(['underscore', 'view/BaseView'], function(_, BaseView) {
             '<%} else {%>' +
             '    <div class="connect-widget-button"><button class="connect-cart-buy" value="<%= uri %>" type="button">Add</button></div>' +
             '<%}%>' +
-            '</p><div style="line-height: 1; clear: both;"></div>' + 
+            '</p><div style="line-height: 1; clear: both;"></div>' +
         '</div>'
     };
 
