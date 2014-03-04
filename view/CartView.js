@@ -167,7 +167,7 @@ define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
 
         // add the currencies ...
         _.each(o.currency, function (cv) {
-            $option = $('<option value="' + cv + '">' + cv + '</option>');
+            var $option = $('<option value="' + cv + '">' + cv + '</option>');
             if (cv === o.defaultCurrency) {
                 $option.attr("selected", "selected");
             }
@@ -178,7 +178,7 @@ define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
         bodyTemplateHtml = $('#drMiniCartBodyTemplate');
         if (bodyTemplateHtml.length) {
             emptyCartHtml = o.emptyCartTemplate;
-            bodyTemplateHTML = bodyTemplateHtml.get(0).html();
+            bodyTemplateHtml = bodyTemplateHtml.get(0).html();
         } else {
             emptyCartHtml = o.emptyCartTemplate;
             bodyTemplateHtml = _.template(o.bodyTemplate, {emptyCartMessage: emptyCartHtml});
@@ -214,9 +214,11 @@ define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
     }
 
     // Main object
+
     return BaseView.extend({
         // @override - the constructor function
-        init: function (options) {
+
+        init: function () {
             var self = this, $cart;
 
             self._super.apply(self, arguments);
@@ -520,7 +522,7 @@ define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
         },
 
         hideCouponEntry : function () {
-            var self = this, o = this.getOptions(), $cart;
+            var o = this.getOptions(), $cart;
 
             $cart = $(o.cartElementSelector);
             // hide the coupon input field
@@ -553,11 +555,9 @@ define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
         },
 
         unblockCartUI: function () {
-            var self = this,
-                o = self.getOptions(),
-                $cart;
+            var self = this;
 
-            $cart = $(self.getOption('cartElementSelector'))
+            $(self.getOption('cartElementSelector'))
                 .find('.connect-cart-body').removeClass('connect-loading')
                 .find('.connect-content').scrollTop(0).end()
                 .find('.connect-cart-currencyselector').removeAttr('disabled');
