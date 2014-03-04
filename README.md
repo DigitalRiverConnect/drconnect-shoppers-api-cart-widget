@@ -40,25 +40,30 @@ See the example HTML file and constructor arguments.
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <title>SuperCool DR Connect API Test Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="css/connect-mini-cart.css" rel="stylesheet">
-    <link href="css/connect-widget-light.css" rel="stylesheet">
-</head>
+    <link href="css/connect-widget-light.css" rel="stylesheet"></head>
 <body>
-
     <div id="drMiniCartSummary"></div>
     <div id="drMiniCart"></div>
+
+    <!-- jQuery is required. Tested with 1.8 - 1.10 + -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="output/mini-cart.min.js"></script>
+
     <script>
         // Example mini-cart constructor
-        requirejs(["minicart"], function(MiniCart) {
+        requirejs(["dr-minicart"], function(MiniCart) {
             var cart = new MiniCart({
-                apiKey: '69ae4fa2eb7bc4dc5057d4b17356c8ca',
-                siteId: 'shopme'
+                apiKey: 'xxxxxxxxxxxxxxxxxxxxxxx',
+                siteId: 'acme'
             });
         });
     </script>
