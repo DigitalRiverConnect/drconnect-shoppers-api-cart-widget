@@ -1,19 +1,26 @@
 {
   "name": "drconnect-shoppers-api-cart-widget",
-  "version": "0.0.0",
-  "homepage": "https://github.com/prycec/drconnect-shoppers-api-cart-widget",
+  "version": "0.0.1",
+  "main" : "dist/mini-cart.min.js",
   "authors": [
     "cpryce <cpryce@digitalriver.com>"
   ],
   "description": "A mini-cart widget",
   "license": "Apache 2",
-  "private": true,
   "ignore": [
-    "**/.*",
+    "*.md",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "component.json",
+    "package.json",
+    "doc",
+    "modularize",
+    "node_modules",
+    "perf",
+    "test",
+    "index.html"
   ],
   "dependencies": {
     "q": "~1.0.0",
