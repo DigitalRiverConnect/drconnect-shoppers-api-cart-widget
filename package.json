@@ -1,10 +1,10 @@
 {
   "name": "dr-minicart",
-  "version": "0.0.0",
+  "version": "0.1.6",
   "description": "A mini-shopping cart based on the DR Connect Shoppers API",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w --reporter spec"
+    "test": ""
   },
   "repository": {
     "type": "git",

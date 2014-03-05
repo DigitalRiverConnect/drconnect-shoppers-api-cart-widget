@@ -1,5 +1,5 @@
 'use strict';
-
+/*global requirejs*/
 require.config({
     paths: {
         'jsonp': '../vendor/dr-jsonplib/jsonp',
@@ -16,4 +16,11 @@ require.config({
             exports: 'Q'
         }
     }
+});
+
+requirejs(["dr-minicart"], function (MiniCart) {
+    var cart = new MiniCart({
+        apiKey: 'xxxxxxxxxxxxxxxxxxxx',
+        siteId: 'acme'
+    });
 });
