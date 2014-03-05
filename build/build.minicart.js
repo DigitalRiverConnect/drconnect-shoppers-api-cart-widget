@@ -17,5 +17,5 @@
     },
     // optimize: "none",
     include: ['dr-minicart'],
-    out: "dist/mini-cart.min.js"
+    out: "../dist/mini-cart.min.js"
 }
