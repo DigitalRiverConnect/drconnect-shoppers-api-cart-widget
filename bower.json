@@ -1,5 +1,5 @@
 {
-  "name": "drconnect-shoppers-api-cart-widget",
+  "name": "drMinicart",
   "version": "0.0.1",
   "main" : "dist/mini-cart.min.js",
   "authors": [
@@ -18,7 +18,6 @@
     "doc",
     "modularize",
     "node_modules",
-    "perf",
     "test",
     "index.html"
   ],
