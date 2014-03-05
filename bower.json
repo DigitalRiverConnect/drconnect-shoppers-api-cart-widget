@@ -1,5 +1,5 @@
 {
-  "name": "drMinicart",
+  "name": "dr-minicart",
   "version": "0.0.1",
   "main" : "dist/mini-cart.min.js",
   "authors": [
