@@ -1,5 +1,8 @@
 /*jslint browser: true, nomen: true, sloppy: true, white: true */
-define(['underscore', 'view/BaseView'], function(_, BaseView) {
+define([
+    'underscore',
+    'view/BaseView'
+], function(_, BaseView) {
     var defaults = {
         offerTemplate :
         '<div class="connect-product-offer span4">' +

@@ -1,35 +1,35 @@
 define(['util/Class', 'connection/Session', 'service/Shopper'], function(Class, Session, ShopperService) {
     return Class.extend({
         // the constructor function
-        init: function(apiKey) {
+        init: function (apiKey) {
             var self = this;
             self._session = new Session(apiKey);
             self.shopperService = new ShopperService(self);
         },
 
-        connect: function() {
-            var self = this, 
+        connect: function () {
+            var self = this,
                 s = self._session;
 
             $(self).trigger('drconnect-beforeconnect', [self]);
             return s.getAccess();
         },
 
-        disconnect : function() {
+        disconnect : function () {
             this._session.reset();
         },
 
-        getSession : function() {
+        getSession : function () {
             return this._session;
         },
         // convenience method; passes through to the shopper service
-        updateShopper : function(options) {
+        updateShopper : function (options) {
             var self = this;
-            return this.shopperService.updateShopper(options).then(function(shopper) {
+            return this.shopperService.updateShopper(options).then(function (shopper) {
                 self._session.updateShopperSession(shopper);
                 return shopper;
-            }, function() {
-                // handle errors 
+            }, function (err) {
+                throw err;
             });
         }
     });

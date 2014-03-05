@@ -31,7 +31,7 @@ define([], function () {
 
     // return a public interface
     return {
-        getBaseUrl: function() {
+        getBaseUrl: function () {
             var self = this,
                 c = config.connection.URI,
                 uri;
@@ -55,7 +55,7 @@ define([], function () {
             return uri;
         },
 
-        getHomePageOfferUrl: function() {
+        getHomePageOfferUrl: function () {
             var self = this, c = config.connection.URI;
 
             return [
@@ -65,15 +65,16 @@ define([], function () {
                 config.homePagePop,
                 "offers",
                 config.homePageOfferId,
-                "product-offers"].join("/");
+                "product-offers"
+            ].join("/");
         },
 
-        getAnonymousLoginUri: function() {
+        getAnonymousLoginUri: function () {
             var self = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.ANONYMOUS_LOGIN].join("/");
         },
 
-        getTokenServiceUri : function(locale, siteId) {
+        getTokenServiceUri : function (locale, siteId) {
             var self = this,
                 currentLocale = locale || self.getDefaultLocale(),
                 qstr = ["Action=ShopDomain",
@@ -83,22 +84,22 @@ define([], function () {
             return "https://" + self.getVanityDomain() + "/store?" + qstr;
         },
 
-        getCategoryResourceUrl : function() {
+        getCategoryResourceUrl : function () {
             var self  = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.CATEGORY_RESOURCE].join("/");
         },
 
-        getCartResourceUrl: function() {
+        getCartResourceUrl: function () {
             var self = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.CART_RESOURCE].join("/");
         },
 
-        getWebCheckoutUrl : function() {
+        getWebCheckoutUrl : function () {
             var self = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.WEB_CHECKOUT].join("/");
         },
 
-        getEmptyOfferUrl : function() {
+        getEmptyOfferUrl : function () {
             var self = this, c = config.connection.URI;
 
             if (config.emptyOfferPop != null && config.emptyOfferId != null) {
@@ -108,16 +109,17 @@ define([], function () {
                     c.OFFER_RESOURCE,
                     config.emptyOfferPop,
                     "offers",
-                    config.emptyOfferId].join("/");
+                    config.emptyOfferId
+                ].join("/");
             }
         },
 
-        getLineItemUrl: function() {
+        getLineItemUrl: function () {
             var self = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.LINE_ITEM_RESOURCE].join("/");
         },
 
-        getProductResourceURL: function() {
+        getProductResourceURL: function () {
             var self = this, c = config.connection.URI;
             return [self.getBaseUrl(), c.VERSION, c.PRODUCT_RESOURCE].join("/");
         },
@@ -127,67 +129,67 @@ define([], function () {
             return [self.getBaseUrl(), c.VERSION, c.SHOPPER].join("/");
         },
 
-        getEnv: function() {
+        getEnv: function () {
             return config.env;
         },
 
-        setEnv: function(v) {
+        setEnv: function (v) {
             config.env = v;
         },
 
-        getApiKey : function() {
+        getApiKey : function () {
             return config.apiKey;
         },
 
-        setApiKey : function(k) {
+        setApiKey : function (k) {
             config.apiKey = k;
         },
 
-        getDefaultCurrency : function() {
+        getDefaultCurrency : function () {
             return config.defaultCurrency;
         },
 
-        setDefaultCurrency : function(c) {
+        setDefaultCurrency : function (c) {
             config.defaultCurrency = c;
         },
 
-        getDefaultLocale : function() {
+        getDefaultLocale : function () {
             return config.defaultLocale;
         },
 
-        setDefaultLocale : function(l) {
+        setDefaultLocale : function (l) {
             config.defaultLocale = l;
         },
 
-        getEmptyOfferId : function() {
+        getEmptyOfferId : function () {
             return config.emptyOfferId;
         },
 
-        setEmptyOfferId : function(id) {
+        setEmptyOfferId : function (id) {
             config.emptyOfferId = id;
         },
 
-        getEmptyOfferPop : function() {
+        getEmptyOfferPop : function () {
             return config.emptyOfferPop;
         },
 
-        setEmptyOfferPop : function(popName) {
+        setEmptyOfferPop : function (popName) {
             config.emptyOfferPop = popName;
         },
 
-        getSiteId: function() {
+        getSiteId: function () {
             return config.siteId;
         },
 
-        setSiteId: function(siteid) {
-            config.siteId = siteid;
+        setSiteId: function (siteId) {
+            config.siteId = siteId;
         },
 
-        getVanityDomain : function() {
+        getVanityDomain : function () {
             return config.vanityDomain;
         },
 
-        setVanityDomain : function(d) {
+        setVanityDomain : function (d) {
             config.vanityDomain = d;
         }
     };

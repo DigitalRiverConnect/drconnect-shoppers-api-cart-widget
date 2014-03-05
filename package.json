@@ -19,9 +19,6 @@
   "dependencies": {
     "q": "~1.0.0",
     "requirejs": "~2.1.11",
-    "almond": "~0.2.9",
-    "json2": "~0.4.0",
-    "jsonp": "git+ssh://git@github.digitalriverws.net/uiArchitecture/jsonp",
-    "underscore": "~1.6.0"
+    "almond": "~0.2.9"
   }
 }

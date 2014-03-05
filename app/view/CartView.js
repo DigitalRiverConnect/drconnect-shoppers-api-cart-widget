@@ -1,4 +1,8 @@
-define(['lib/underscore', 'view/BaseView'], function (_, BaseView) {
+define([
+    'underscore',
+    'view/BaseView'
+], function (_, BaseView) {
+    console.log(_);
     var defaults = {
         summaryTemplate :
         '<div class="connect-cart-summary">' +

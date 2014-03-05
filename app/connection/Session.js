@@ -1,5 +1,5 @@
 /*jslint eqeq: true, nomen: true */
-define(['config', 'connection/Connection', 'lib/q'], function(config, Connection, Q) {
+define(['config', 'connection/Connection', 'q'], function(config, Connection, Q) {
     /**
      * This object is for getting a Session for connecting
      * @returns {Session}
