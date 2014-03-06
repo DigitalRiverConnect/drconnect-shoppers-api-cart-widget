@@ -8,17 +8,13 @@
   "description": "A mini-cart widget",
   "license": "Apache 2",
   "ignore": [
-    "*.md",
+    "app",
+    "build",
+    "vendor",
     "node_modules",
-    "bower_components",
     "test",
-    "tests",
-    "component.json",
     "package.json",
     "doc",
-    "modularize",
-    "node_modules",
-    "test",
     "index.html"
   ],
   "dependencies": {
