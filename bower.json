@@ -17,7 +17,7 @@
     "doc",
     "index.html"
   ],
-  "dependencies": {
+  "devDependencies": {
     "q": "~1.0.0",
     "requirejs": "~2.1.11",
     "dr-jsonplib": "git+ssh://git@github.digitalriverws.net/uiArchitecture/jsonp",
