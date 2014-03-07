@@ -1,4 +1,4 @@
-define(['util/Class', 'connection/Session', 'service/Shopper'], function(Class, Session, ShopperService) {
+define(['util/Class', 'connection/Session', 'service/Shopper'], function (Class, Session, ShopperService) {
     return Class.extend({
         // the constructor function
         init: function (apiKey) {
