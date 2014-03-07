@@ -10,7 +10,7 @@ define(['util/Class', 'connection/Session', 'service/Shopper'], function (Class,
         connect: function () {
             var self = this,
                 s = self._session;
-
+            // TODO cancel the call if the trigger handler returns false
             $(self).trigger('drconnect-beforeconnect', [self]);
             return s.getAccess();
         },

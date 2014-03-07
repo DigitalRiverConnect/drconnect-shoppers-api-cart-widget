@@ -64,6 +64,7 @@ define(['config', 'connection/Connection', 'q'], function (config, Connection, Q
                 uri;
 
             uri = config.getTokenServiceUri(locale, siteId);
+            uri += uri.indexOf('?') !== -1 ? "&callback=callback" : '?callback=callback';
 
             if (self.pendingRequest == null) {
                 self.pendingRequest = self._connection.request(uri, 'GET').then(function (sessionData) {

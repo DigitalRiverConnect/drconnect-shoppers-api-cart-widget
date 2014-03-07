@@ -29,9 +29,19 @@ define(['jsonp'], function (JSONP) {
             return this.request(uri, "POST", {}, headers, fields);
         },
 
+        // TODO rename this method to reflect that it does json p
         request : function (uri, method, urlParams) {
             // ignores headerParams
-            return JSONP.getJSON(uri, method, urlParams);
+            if (urlParams != null) {
+                uri += '?callback=callback&format=json';
+
+                for (var param in urlParams) {
+                    if (urlParams.hasOwnProperty(param)) {
+                        uri += '&' + param + '=' + urlParams[param];
+                    }
+                }
+            }
+            return JSONP.getJSON(uri);
         }
     };
     return Connection;

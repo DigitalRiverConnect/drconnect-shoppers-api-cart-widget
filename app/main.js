@@ -20,7 +20,7 @@ require.config({
 
 requirejs(["dr-minicart"], function (MiniCart) {
     var cart = new MiniCart({
-        apiKey: 'xxxxxxxxxxxxxxxxxxxx',
-        siteId: 'acme'
+        apiKey: 'IOGl4gRimt6h9gpPCfABcMjfPNKPzQer',
+        siteId: 'kaboom'
     });
 });

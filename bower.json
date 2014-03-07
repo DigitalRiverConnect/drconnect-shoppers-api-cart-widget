@@ -1,6 +1,6 @@
 {
   "name": "dr-minicart",
-  "version": "0.0.1",
+  "version": "0.1.7",
   "main" : "dist/mini-cart.min.js",
   "authors": [
     "cpryce <cpryce@digitalriver.com>"
