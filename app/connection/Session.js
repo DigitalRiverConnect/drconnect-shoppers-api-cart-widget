@@ -88,7 +88,7 @@ define(['config', 'connection/Connection', 'q'], function (config, Connection, Q
         getAnnonymousAccessToken : function (urlParams, promise) {
             var self = this,
                 uri = config.getAnonymousLoginUri();
-                debugger;
+
             return self._connection.request(uri, 'GET', urlParams)
                 .then(function (data) {
                     /*jshint camelcase: false*/
