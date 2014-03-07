@@ -12,6 +12,7 @@ define([
     // Re-write standard store buy links to change them to add-to-cart
     // config option hijackLinks (default true).
     function ajaxifyAddToCartLinks(cartView, cartService, context) {
+
         // Define the regular expression searches for the hyperlinks
         var productIdRegEx = /\/?ProductID[=\.](\d+)\/?/i,
             quantityRegEx = /\/?Quantity[=\.](\d+)\/?/i;
@@ -28,6 +29,7 @@ define([
 
             // Add the onclick event-handler
             $(this).on("click", function (evt) {
+
                 var $btn = $(this);
                 evt.preventDefault();
 

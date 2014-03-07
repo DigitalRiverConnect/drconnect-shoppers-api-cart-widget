@@ -31,9 +31,11 @@ define(['jsonp'], function (JSONP) {
 
         // TODO rename this method to reflect that it does json p
         request : function (uri, method, urlParams) {
+            method = (method == null) ? 'get' : method.toLowerCase();
+
             // ignores headerParams
             if (urlParams != null) {
-                uri += '?callback=callback&format=json';
+                uri += '?callback=callback&format=json&method=' + method;
 
                 for (var param in urlParams) {
                     if (urlParams.hasOwnProperty(param)) {
