@@ -1,0 +1,244 @@
+.connect-cart-wrapper {
+    padding: 0px;
+    display:block;
+    width: 100%;
+    position: relative;
+}
+.connect-cart-feedback {
+    margin: 5px 0;
+    padding: 5px;
+    display: none;
+}
+
+.connect-cart-feedback p {
+    margin: 0;
+    padding: 0;
+}
+
+.connect-cart-wrapper.standalone {
+    border-width: 1px;
+    border-style: solid;
+    position: absolute;
+}
+
+.connect-cart-wrapper h2 {
+    font-weight: normal;
+}
+
+.connect-cart-header {
+    padding: 10px 0;
+}
+
+.connect-cart-currency label {
+    display: inline-block;
+    line-height: 20px;
+}
+
+.connect-cart-currencyselector {
+    min-width: 75px;
+    width: auto;
+}
+
+.connect-cart-body {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    position: relative;
+}
+
+.connect-cart-body .connect-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 250px;
+    padding: 10px 0;
+    position: relative;
+    zoom: 1;
+}
+
+.connect-cart-totals {
+    padding: 5px 0;
+    text-align: right;
+    display: none;
+}
+
+.connect-cart-subtotal span {
+    font-weight: normal;
+    font-size: 16pt;
+}
+
+.connect-cart-footer {
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding: 10px 0;
+    display: none;
+}
+
+    .connect-cart-footer .connect-widget-button,
+    .connect-cart-footer .connect-widget-link {
+        float: left;
+    }
+
+    .connect-cart-footer .right {
+        float: right;
+    }
+
+    .connect-cart-couponwrapper.connect-widget-button {
+        float: none !important;
+    }
+
+.connect-cart-title {
+    line-height: 12pt;
+    margin: 0 0 5px 0;
+}
+
+.connect-cart-image {
+    float: right; 
+    margin: 3px;
+    max-height: 85px;
+    max-width: 85px;
+}
+
+.connect-lineitem-pricing {
+    clear: both;
+}
+
+span.connect-widget-strikethrough {
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+span.connect-lineitem-saleprice {
+    display: inline-block;
+}
+
+#drMiniCart input[type=text] {
+    padding: 4px;
+    margin: 0;
+    font-size: 9pt;
+    border-style: solid;
+    border-width: 1px;
+    vertical-align: middle;
+}
+
+#drMiniCart button {
+    padding: 2px 4px;
+    vertical-align: middle;
+}
+
+.connect-cart-lineitem {
+    clear: both;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+    .connect-cart-lineitem img {
+        float: right; 
+        margin: 3px;
+        max-height: 85px;
+        max-width: 85px;
+    }
+
+    .connect-cart-lineitem input[type=text]  {
+        width: 20px;
+        margin-left: 5px;
+    }
+
+    .connect-cart-lineitem ul {
+        list-style: none;
+        margin-left:0;
+        margin-top: 5px;
+    }
+
+    .connect-cart-lineitem li{
+        margin: 0 0 8px 0;
+        line-height: 10pt;
+    }
+
+button.connect-cart-buy {
+    min-width: 70px;
+    margin-top: 5px;
+}
+
+.connect-cart-id {
+    display: none;
+}
+
+.connect-cart-loadingmask {
+    position: absolute;
+    top: 0;
+    left:0;
+}
+
+.connect-loading .connect-cart-loadingmask {
+    height: 100%;
+    width: 100%;
+}
+
+.connect-cart-loadingmask span.connect-spinner  {
+    display: none;
+}
+
+.connect-cart-couponwrapper {
+    display: none;
+    padding: 10px 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.connect-cart-orderdiscount {
+    margin-bottom: 5px;
+}
+
+.connect-cart-summary h3 {
+    margin: 0;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.connect-loading .connect-cart-loadingmask {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(40,40,40,0.5);
+    z-index: 100;
+}
+
+.connect-widget-couponcode {
+    width: 150px;
+}
+
+.connect-cart-offer {
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+
+.connect-cart-offer:first-child {
+    border-top: 0 none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.connect-cart-pricing {
+    display: block;
+}
+
+.connect-widget-clearfix:before,
+.connect-widget-clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.connect-widget-clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.connect-widget-clearfix {
+    *zoom: 1;
+}

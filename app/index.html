@@ -5,9 +5,10 @@
     <title>SuperCool DR Connect API Test Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="dist/css/connect-mini-cart.css" rel="stylesheet">
-    <link href="dist/css/connect-widget-light.css" rel="stylesheet"></head>
+    <link href="../dist/css/connect-mini-cart.css" rel="stylesheet">
+    <link href="../dist/css/connect-widget-light.css" rel="stylesheet"></head>
 <body>
+
 <a rel="buyLink" href="//store.digitalriver.com/store/kaboom/en_US/buy/productID.295236700" class="btn btn-default">
     Buy Now
 </a>
@@ -16,16 +17,9 @@
 <div id="drMiniCart"></div>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="dist/js/dr-minicart.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-<script>
-    // Example mini-cart constructor
-    requirejs(["dr-minicart"], function(MiniCart) {
-        var cart = new MiniCart({
-            apiKey: 'IOGl4gRimt6h9gpPCfABcMjfPNKPzQer',
-            siteId: 'kaboom'
-        });
-    });
-</script>
+<script src="../vendor/requirejs/require.js" data-main="main"></script>
+
 </body>
 </html>

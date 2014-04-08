@@ -1,0 +1,27 @@
+{
+  "name": "dr-minicart",
+  "version": "0.1.7",
+  "main" : "dist/mini-cart.min.js",
+  "authors": [
+    "cpryce <cpryce@digitalriver.com>"
+  ],
+  "description": "A mini-cart widget",
+  "license": "Apache 2",
+  "ignore": [
+    "app",
+    "build",
+    "vendor",
+    "node_modules",
+    "test",
+    "package.json",
+    "doc",
+    "index.html"
+  ],
+  "devDependencies": {
+    "q": "~1.0.0",
+    "requirejs": "~2.1.11",
+    "dr-jsonplib": "git+ssh://git@github.digitalriverws.net/uiArchitecture/jsonp",
+    "json2": "*",
+    "lodash": "~2.4.1"
+  }
+}

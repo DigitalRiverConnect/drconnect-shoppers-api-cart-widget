@@ -1,0 +1,24 @@
+{
+  "name": "dr-minicart",
+  "version": "0.1.7",
+  "description": "A mini-shopping cart based on the DR Connect Shoppers API",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/prycec/drconnect-shoppers-api-cart-widget.git"
+  },
+  "author": "prycec@gmail.com",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/prycec/drconnect-shoppers-api-cart-widget/issues"
+  },
+  "homepage": "https://github.com/prycec/drconnect-shoppers-api-cart-widget",
+  "dependencies": {
+    "q": "~1.0.0",
+    "requirejs": "~2.1.11",
+    "almond": "~0.2.9"
+  }
+}

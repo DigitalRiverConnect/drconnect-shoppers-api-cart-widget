@@ -1,17 +1,32 @@
-###AMD
+##AMD
 The project is built using the requirejs Asynchronous Module Definition (AMD) 
 framework. For more information, see the [requirejs](http://requirejs.org/ "Link to requirejs") web site.
 
-###Almond
-To keep the files smaller, the project uses [Almond](https://github.com/jrburke/almond "Link to Almond GitHub"), a replacement AMD loader
-for RequireJS.
+##To Build the Optimized Project
+### Install the Dependencies
+This project requires NodeJS to install modules to build the project, and Bower to manage client libraries. Please
+refer to the [NodeJS](http://nodejs.org) web site to install and configure NodeJS for your runtime.
 
-###To Build the Optimized Project
-The optimzer for Require - r.js - requires Node.js or Rhino.jar. To build
-with Node, use the following command from the project root directory
+#### Bower for Client Libraries
+With Node successfully installed, the next step is to install Bower. Usually this should be done globally
 
 ```
- > node rq/node_modules/requirejs/bin/r.js -o build.minicart.js name=rq/almond
+npm install -g bower
+```
+
+### Install Node Dependencies
+With bower installed globally, you should be able to install the project dependencies with the following command:
+
+```
+npm install && bower install
+```
+
+### Build the Project
+The optimzer for Require - r.js - requires Node.js or Rhino.jar. To build
+with Node, use the following command from the project root directory:
+
+```
+ $ node node_modules/requirejs/bin/r.js -o build/build.minicart.js name=../node_modules/almond/almond
 ```
 
 By default this will put the optimized file mini-cart.min.js in the output
@@ -21,7 +36,7 @@ file in the root directory.
 See [NodeJS.org](http://nodejs.org/ "Link to Node.JS") for instructions on downloading and configuring node.
 
 
-###To Deploy the Mini-cart
+### Deploy the Mini-cart
 1. Copy the CSS files in the /css folder in the project root and put them where you
 would normally keep css files. There are two files to copy:
     * /css/connect-mini-cart.css - contains positioning rules; edit with caution
@@ -36,7 +51,7 @@ HTML elements for the mini-cart and cart summary.
 4. Create a constructor script. The constructor is used to set options such as API Key and currency at runtime. 
 See the example HTML file and constructor arguments.
 
-###Example HTML File
+####Example HTML File
 
 ```html
 <!DOCTYPE html>
@@ -112,9 +127,9 @@ See the example HTML file and constructor arguments.
 </table>
 
 \* _use either a fully constructed client object or an api key. If a constructed client
-object is passed, apiKey is ignored. If not, it will be used to constuct a client object._
+object is passed, apiKey is ignored. If not, it will be used to construct a client object._
 
-###Accessing Other Modules
+####Accessing Other Modules
 Other script modules can be pulled in to the require block as needed. The most common
 uses would be to pull in the api/Client module to construct a client to share between
 to applications.
